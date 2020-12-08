@@ -29,8 +29,8 @@ def read_directorty(directory_name):
             temp[int(directory_name[5:6])]=1
             test_labels.append(temp)
 #step1:data preparation
-train_size=60000
-test_size=10000
+train_size=10000
+test_size=1000
 train_of_img=[]
 test_of_img=[]
 train_labels=[]
@@ -50,8 +50,25 @@ test_list=(np.array(change_dimention(test_of_img)))
 train_list=(np.array(change_dimention(train_of_img)))
 test_labels=(np.array(test_labels))
 train_labels=(np.array(train_labels))
-np.save('test_list.npy',test_list)
-np.save('train_list.npy',train_list)
-np.save('test_labels.npy',test_labels)
-np.save('train_labels.npy',train_labels)
+
+test_min_list=[]
+train_min_list=[]
+test_min_labels=[]
+train_min_labels=[]
+
+idx = list(range(train_size))
+random.shuffle(idx)
+for i in range(0,train_size):
+    train_min_list.append(train_list[idx[i]])
+    train_min_labels.append(train_labels[idx[i]])
+idx = list(range(test_size))
+random.shuffle(idx)
+for i in range(0,1000):
+    test_min_list.append(test_list[idx[i]])
+    test_min_labels.append(test_labels[idx[i]])
+np.save('train_list.npy',train_min_list)
+np.save('train_labels.npy',train_min_labels)
+np.save('test_list.npy',test_min_list)
+np.save('test_labels.npy',test_min_labels)
+
 
